@@ -1,0 +1,57 @@
+name: build_ubuntu
+
+on:
+  push:
+    branches: ['*']
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - name: debian-systemd-8
+            dockerfile: systemd/debian/8.Dockerfile
+            platforms: |-
+              linux/amd64
+            tags: |-
+              rnsc/debian-systemd:8
+              rnsc/debian-systemd:jessie
+          - name: debian-systemd-9
+            dockerfile: systemd/debian/9.Dockerfile
+            platforms: |-
+              linux/amd64
+              linux/arm/v7
+              linux/arm/v8
+              linux/arm64
+            tags: |-
+              rnsc/debian-systemd:9
+              rnsc/debian-systemd:stretch
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build and push ${{ matrix.name }}
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          platforms: ${{ matrix.platforms }}
+          push: true
+          tags: ${{ matrix.tags }}
+          labels: |
+            maintainer=${{ github.repository_owner }}
+            org.opencontainers.image.vendor=${{ github.repository_owner }}
+            org.opencontainers.image.revision=${{ github.sha }}
