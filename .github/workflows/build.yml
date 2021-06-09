@@ -39,7 +39,7 @@ jobs:
             if [ "${flavor}" = "debian" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64"; fi
             if [ "${flavor}" = "debian" ] && [ "${version}" = "11" ]; then PLATFORMS="linux/amd64,linux/arm/v7"; fi
             if [ "${flavor}" = "centos" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64,linux/arm64"; fi
-            if [ "${flavor}" = "ubuntu" ] && [ "${version}" = "20.04" ]; then PLATFORMS="linux/amd64,linux/arm64"; fi
+            if [ "${flavor}" = "ubuntu" ] && [ "${version}" = "20.04" ]; then PLATFORMS="linux/amd64,linux/arm/v7"; fi
             
             docker buildx build \
             --platform="${PLATFORMS}" \
