@@ -38,6 +38,7 @@ jobs:
             
             PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8"
             if [ "${flavor}" = "debian" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64"; fi
+            if [ "${flavor}" = "debian" ] && [ "${version}" = "9" ]; then PLATFORMS="linux/amd64,linux/arm/v7"; fi
             if [ "${flavor}" = "debian" ] && [ "${version}" = "10" ]; then PLATFORMS="linux/amd64,linux/arm/v7"; fi
             if [ "${flavor}" = "debian" ] && [ "${version}" = "11" ]; then PLATFORMS="linux/amd64,linux/arm/v7"; fi
             if [ "${flavor}" = "centos" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64,linux/arm64"; fi
