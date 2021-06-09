@@ -21,15 +21,24 @@ jobs:
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
+          # FIX FOR BUILD ISSUES
+          # https://github.com/docker/buildx/issues/495#issuecomment-761562905
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
           docker buildx create --name multiarch --driver docker-container --use
           docker buildx inspect --bootstrap
+          # END OF FIX
+          
           for filepath in systemd/*/*.Dockerfile;
           do
+            PLATFORMS="linux/amd64,linux/arm64,linux/armhf,linux/arm/v7,linux/arm/v8"
+            
+            if "${flavor}" == "debian" && "${version}" == "8"; then PLATFORMS="linux/amd64"; fi
+            if "${flavor}" == "centos" && "${version}" == "8"; then PLATFORMS="linux/amd64,linux/arm64,linux/armhf"; fi
+            
             dir=${filepath%/*}; file=${filepath##*/}; version=${file%.*}; flavor=${dir##*/};
             echo "${filepath} ${version} ${flavor}";
             docker buildx build \
-            --platform=linux/amd64,linux/arm64 \
+            --platform="${PLATFORMS}" \
             --output "type=image,push=true" \
             --file "${filepath}" . \
             --tag "${DOCKER_HUB_USERNAME}/systemd-${flavor}:${version}"
