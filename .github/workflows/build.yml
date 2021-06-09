@@ -43,4 +43,6 @@ jobs:
             --output "type=image,push=true" \
             --file "${filepath}" . \
             --tag "${DOCKER_HUB_USERNAME}/systemd-${flavor}:${version}"
+            
+            docker stop multiarch/qemu-user-static && docker rm multiarch/qemu-user-static
           done
