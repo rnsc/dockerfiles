@@ -3,6 +3,8 @@ name: Debian images build
 on:
   push:
     branches: ['*']
+    paths:
+      - systemd/debian/*
 
 jobs:
   docker:

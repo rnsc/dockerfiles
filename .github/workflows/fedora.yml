@@ -1,10 +1,10 @@
-name: Ubuntu images build
+name: Fedora images build
 
 on:
   push:
     branches: ['*']
     paths:
-      - systemd/ubuntu/*
+      - systemd/fedora/*
 
 jobs:
   docker:
@@ -12,33 +12,14 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: systemd-ubuntu-16.04
-            dockerfile: systemd/ubuntu/16.04.Dockerfile
+          - name: systemd-fedora-latest
+            dockerfile: systemd/fedora/Dockerfile
             platforms: |-
               linux/amd64
               linux/arm/v7
               linux/arm64
             tags: |-
-              rnsc/systemd-ubuntu:16.04
-              rnsc/systemd-ubuntu:xenial
-          - name: systemd-ubuntu-18.04
-            dockerfile: systemd/ubuntu/18.04.Dockerfile
-            platforms: |-
-              linux/amd64
-              linux/arm/v7
-              linux/arm64
-            tags: |-
-              rnsc/systemd-ubuntu:18.04
-              rnsc/systemd-ubuntu:bionic
-          - name: systemd-ubuntu-20.04
-            dockerfile: systemd/ubuntu/20.04.Dockerfile
-            platforms: |-
-              linux/amd64
-              linux/arm/v7
-              linux/arm64
-            tags: |-
-              rnsc/systemd-ubuntu:20.04
-              rnsc/systemd-ubuntu:focal
+              rnsc/systemd-fedora:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2

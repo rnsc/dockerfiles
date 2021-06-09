@@ -3,6 +3,8 @@ name: Centos images build
 on:
   push:
     branches: ['*']
+    paths:
+      - systemd/centos/*
 
 jobs:
   docker:
@@ -22,7 +24,6 @@ jobs:
             dockerfile: systemd/centos/8.Dockerfile
             platforms: |-
               linux/amd64
-              linux/arm/v7
               linux/arm64
             tags: |-
               rnsc/systemd-centos:8
