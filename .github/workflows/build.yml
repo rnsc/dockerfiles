@@ -22,7 +22,7 @@ jobs:
 
       - name: Build dockerfile (with push)
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
           for filepath in systemd/*/*.Dockerfile;
           do
