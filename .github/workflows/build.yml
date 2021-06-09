@@ -31,13 +31,14 @@ jobs:
           
           for filepath in systemd/*/*.Dockerfile;
           do
-            PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8"
-            
-            if [[ "${flavor}" == "debian" ]] && [[ "${version}" == "8" ]]; then PLATFORMS="linux/amd64"; fi
-            if [[ "${flavor}" == "centos" ]] && [[ "${version}" == "8" ]]; then PLATFORMS="linux/amd64,linux/arm64,linux/armhf"; fi
             
             dir=${filepath%/*}; file=${filepath##*/}; version=${file%.*}; flavor=${dir##*/};
-            echo "${filepath} ${version} ${flavor}";
+            echo "Starting build for ${filepath} ${version} ${flavor}\n";
+            
+            PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8"
+            if [ "${flavor}" == "debian" ] && [ "${version}" == "8" ]; then PLATFORMS="linux/amd64"; fi
+            if [ "${flavor}" == "centos" ] && [ "${version}" == "8" ]; then PLATFORMS="linux/amd64,linux/arm64,linux/armhf"; fi
+            
             docker buildx build \
             --platform="${PLATFORMS}" \
             --output "type=image,push=true" \
