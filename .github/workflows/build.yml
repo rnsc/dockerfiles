@@ -37,6 +37,7 @@ jobs:
             echo "Starting build for ${filepath} ${version} ${flavor}\n";
             
             PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8"
+            if [ "${flavor}" = "debian" ]; then PLATFORMS="linux/amd64,linux/arm64"; fi
             if [ "${flavor}" = "debian" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64"; fi
             if [ "${flavor}" = "centos" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64,linux/arm64"; fi
             
