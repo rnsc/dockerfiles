@@ -1,4 +1,4 @@
-name: build_ubuntu
+name: Debian images build
 
 on:
   push:
