@@ -39,6 +39,7 @@ jobs:
             tags: |-
               rnsc/systemd-ubuntu:20.04
               rnsc/systemd-ubuntu:focal
+              rnsc/systemd-ubuntu:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2

@@ -37,6 +37,7 @@ jobs:
             tags: |-
               rnsc/systemd-debian:10
               rnsc/systemd-debian:buster
+              rnsc/systemd-debian:latest
           - name: systemd-debian-11
             dockerfile: systemd/debian/11.Dockerfile
             platforms: |-
