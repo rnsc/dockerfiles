@@ -35,9 +35,8 @@ jobs:
             dir=${filepath%/*}; file=${filepath##*/}; version=${file%.*}; flavor=${dir##*/};
             echo "Starting build for ${filepath} ${version} ${flavor}\n";
             
-            PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8"
+            PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7"
             if [ "${flavor}" = "debian" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64"; fi
-            if [ "${flavor}" = "debian" ] && [ "${version}" = "10" ]; then PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7"; fi
             if [ "${flavor}" = "centos" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64,linux/arm64"; fi
             
             docker buildx build \
