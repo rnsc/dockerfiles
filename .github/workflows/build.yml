@@ -23,7 +23,7 @@ jobs:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
           set -ex
-          for filepath in systemd/*/*.Dockerfile;
+          for filepath in systemd/*/*Dockerfile;
           do
             # FIX FOR BUILD ISSUES
             # https://github.com/docker/buildx/issues/495#issuecomment-761562905
@@ -33,13 +33,14 @@ jobs:
             # END OF FIX
             
             dir=${filepath%/*}; file=${filepath##*/}; version=${file%.*}; flavor=${dir##*/};
+            if [ "${version}" = "Dockerfile" ] || [ "${version}" = "" ]; then version="latest"
             echo "Starting build for ${filepath} ${version} ${flavor}\n";
             
-            PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7"
+            PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8"
             if [ "${flavor}" = "debian" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64"; fi
             if [ "${flavor}" = "debian" ] && [ "${version}" = "11" ]; then PLATFORMS="linux/amd64,linux/arm/v7"; fi
             if [ "${flavor}" = "centos" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64,linux/arm64"; fi
-            if [ "${flavor}" = "ubuntu" ] && [ "${version}" = "20.04" ]; then PLATFORMS="linux/amd64,linux/arm/v7"; fi
+            if [ "${flavor}" = "ubuntu" ] && [ "${version}" = "20.04" ]; then PLATFORMS="linux/amd64,linux/arm/v7,linux/arm/v8"; fi
             
             docker buildx build \
             --platform="${PLATFORMS}" \
