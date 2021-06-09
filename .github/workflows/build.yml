@@ -22,6 +22,7 @@ jobs:
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
+          export TERM=xterm-256color
           # FIX FOR BUILD ISSUES
           # https://github.com/docker/buildx/issues/495#issuecomment-761562905
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
@@ -37,7 +38,7 @@ jobs:
             
             PLATFORMS="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8"
             if [ "${flavor}" = "debian" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64"; fi
-            if [ "${flavor}" = "centos" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64,linux/arm64,linux/armhf"; fi
+            if [ "${flavor}" = "centos" ] && [ "${version}" = "8" ]; then PLATFORMS="linux/amd64,linux/arm64"; fi
             
             docker buildx build \
             --platform="${PLATFORMS}" \
