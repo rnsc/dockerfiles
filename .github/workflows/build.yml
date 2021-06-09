@@ -45,5 +45,5 @@ jobs:
             --file "${filepath}" . \
             --tag "${DOCKER_HUB_USERNAME}/systemd-${flavor}:${version}"
             
-            docker stop buildx_buildkit_multiarch0 && docker rm buildx_buildkit_multiarch0
+            docker buildx rm multiarch
           done
