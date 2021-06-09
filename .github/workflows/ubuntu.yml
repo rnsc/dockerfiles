@@ -15,7 +15,6 @@ jobs:
             platforms: |-
               linux/amd64
               linux/arm/v7
-              linux/arm/v8
               linux/arm64
             tags: |-
               rnsc/systemd-ubuntu:16.04
@@ -25,7 +24,6 @@ jobs:
             platforms: |-
               linux/amd64
               linux/arm/v7
-              linux/arm/v8
               linux/arm64
             tags: |-
               rnsc/systemd-ubuntu:18.04
@@ -35,7 +33,6 @@ jobs:
             platforms: |-
               linux/amd64
               linux/arm/v7
-              linux/arm/v8
               linux/arm64
             tags: |-
               rnsc/systemd-ubuntu:20.04
