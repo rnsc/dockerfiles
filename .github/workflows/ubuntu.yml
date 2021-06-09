@@ -17,8 +17,8 @@ jobs:
               linux/arm/v7
               linux/arm64
             tags: |-
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:16.04
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:xenial
+              rnsc/systemd-ubuntu:16.04
+              rnsc/systemd-ubuntu:xenial
           - name: systemd-ubuntu-18.04
             dockerfile: systemd/ubuntu/18.04.Dockerfile
             platforms: |-
@@ -26,8 +26,8 @@ jobs:
               linux/arm/v7
               linux/arm64
             tags: |-
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:18.04
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:bionic
+              rnsc/systemd-ubuntu:18.04
+              rnsc/systemd-ubuntu:bionic
           - name: systemd-ubuntu-20.04
             dockerfile: systemd/ubuntu/20.04.Dockerfile
             platforms: |-
@@ -35,8 +35,8 @@ jobs:
               linux/arm/v7
               linux/arm64
             tags: |-
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:20.04
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:focal
+              rnsc/systemd-ubuntu:20.04
+              rnsc/systemd-ubuntu:focal
     steps:
       - name: Checkout
         uses: actions/checkout@v2
