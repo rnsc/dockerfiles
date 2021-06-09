@@ -22,6 +22,7 @@ jobs:
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
         run: |
+          set -ex
           for filepath in systemd/*/*.Dockerfile;
           do
             # FIX FOR BUILD ISSUES
