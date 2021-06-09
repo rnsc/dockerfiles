@@ -28,9 +28,10 @@ jobs:
           for filepath in systemd/*/*.Dockerfile;
           do
             dir=${filepath%/*}; file=${filepath##*/}; version=${file%.*}; flavor=${dir##*/};
+            echo "${filepath} ${version} ${flavor}";
             docker buildx build \
-            --platform=linux/amd64,linux/arm/v8,linux/arm64 \
+            --platform=linux/amd64,linux/arm/v7,linux/arm64 \
             --output "type=image,push=true" \
-            --file ${filepath} . \
-            --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/systemd-${flavor}:${version}
+            --file "${filepath}" . \
+            --tag "${DOCKER_USERNAME}/systemd-${flavor}:${version}"
           done
