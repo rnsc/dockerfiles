@@ -22,4 +22,3 @@ or if it doesn't work
 3. Remove the container
 
 `docker rm -f systemd-centos`
-
