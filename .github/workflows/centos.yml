@@ -1,4 +1,4 @@
-name: Ubuntu images build
+name: Centos images build
 
 on:
   push:
@@ -10,33 +10,22 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: systemd-ubuntu-16.04
-            dockerfile: systemd/ubuntu/16.04.Dockerfile
+          - name: systemd-centos-7
+            dockerfile: systemd/centos/7.Dockerfile
             platforms: |-
               linux/amd64
               linux/arm/v7
               linux/arm64
             tags: |-
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:16.04
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:xenial
-          - name: systemd-ubuntu-18.04
-            dockerfile: systemd/ubuntu/18.04.Dockerfile
+              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-centos:7
+          - name: systemd-centos-8
+            dockerfile: systemd/centos/8.Dockerfile
             platforms: |-
               linux/amd64
               linux/arm/v7
               linux/arm64
             tags: |-
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:18.04
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:bionic
-          - name: systemd-ubuntu-20.04
-            dockerfile: systemd/ubuntu/20.04.Dockerfile
-            platforms: |-
-              linux/amd64
-              linux/arm/v7
-              linux/arm64
-            tags: |-
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:20.04
-              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-ubuntu:focal
+              ${{ secrets.DOCKER_HUB_USERNAME }}/systemd-centos:8
     steps:
       - name: Checkout
         uses: actions/checkout@v2
