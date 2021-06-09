@@ -10,22 +10,22 @@ jobs:
     strategy:
       matrix:
         include:
-          - name: debian-systemd-8
+          - name: systemd-debian-8
             dockerfile: systemd/debian/8.Dockerfile
             platforms: |-
               linux/amd64
             tags: |-
-              rnsc/debian-systemd:8
-              rnsc/debian-systemd:jessie
-          - name: debian-systemd-9
+              rnsc/systemd-debian:8
+              rnsc/systemd-debian:jessie
+          - name: systemd-debian-9
             dockerfile: systemd/debian/9.Dockerfile
             platforms: |-
               linux/amd64
               linux/arm/v7
               linux/arm64
             tags: |-
-              rnsc/debian-systemd:9
-              rnsc/debian-systemd:stretch
+              rnsc/systemd-debian:9
+              rnsc/systemd-debian:stretch
     steps:
       - name: Checkout
         uses: actions/checkout@v2
